@@ -1,12 +1,37 @@
 <!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd" >
 
-<suite name="Orange application." verbose="1" >
-    <test name="Login into the application test" >
+<suite name="Orange application." verbose="1" parallel="tests">
+
+    <listeners>
+        <listener class-name="org.uncommons.reportng.HTMLReporter"/>
+        <listener class-name="org.uncommons.reportng.JUnitXMLReporter"/>
+    </listeners>
+
+    <test name="Login into the application test.">
         <classes>
-            <class name="stepDefinitions.LoggingInStep" />
+            <class name="stepDefinitions.LoggingInStep">
+                <methods>
+                    <include name="the_client_is_in_the_login_page"/>
+                    <parameter name="username" value="Admin"></parameter>
+                    <parameter name="password" value="admin123"></parameter>
+                    <include name="types_as_username_as_password_and_clicks_on_log_in_button"/>
+                    <include name="the_home_page_is_going_to_be_displayed"/>
+                </methods>
+            </class>
         </classes>
     </test>
 
-
+    <test name="Testing failed login into the application.">
+        <classes>
+            <class name="stepDefinitions.LoggingInStep">
+                <methods>
+                    <include name="the_client_is_in_the_login_page"/>
+                    <parameter name="username" value="Admin"></parameter>
+                    <include name="types_as_username_and_press_enter_key"/>
+                    <include name="the_login_page_show_an_error_message"/>
+                </methods>
+            </class>
+        </classes>
+    </test>
 
 </suite>

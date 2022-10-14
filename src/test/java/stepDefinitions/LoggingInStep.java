@@ -10,6 +10,9 @@ import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Reporter;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.Parameters;
+import org.testng.annotations.Test;
 import pages.HomePage;
 import pages.LoginPage;
 import utils.exceptions.FrameworkException;
@@ -26,6 +29,7 @@ public class LoggingInStep extends AbstractTestNGCucumberTests {
     private HomePage homePage;
     private FrameworkException frameworkException;
 
+    @Test
     @Given("The client is on the login page.")
     public void the_client_is_in_the_login_page() throws IOException {
         WebDriverManager.chromedriver().setup();
@@ -37,6 +41,8 @@ public class LoggingInStep extends AbstractTestNGCucumberTests {
         Reporter.log("The client is now on the Login Page.");
     }
 
+    @Test
+    @Parameters({"username", "password"})
     @When("Types {string} as username, {string} as password and clicks on log in button.")
     public void types_as_username_as_password_and_clicks_on_log_in_button(String username, String password) throws FrameworkException, IOException {
         this.loginPage.fillUsername(username);
@@ -50,12 +56,15 @@ public class LoggingInStep extends AbstractTestNGCucumberTests {
         }
     }
 
+    @Test
     @Then("The Home Page is going to be displayed.")
     public void the_home_page_is_going_to_be_displayed() throws IOException {
         assertThat(this.homePage.validateElementsAreVisible());
         Reporter.log("The Home Page has loaded.");
     }
 
+    @Test
+    @Parameters({"username"})
     @When("Types {string} as username and clicks on login button.")
     public void types_as_username_and_press_enter_key(String username) throws FrameworkException, IOException {
         this.loginPage.fillUsername(username);
@@ -68,6 +77,7 @@ public class LoggingInStep extends AbstractTestNGCucumberTests {
         }
     }
 
+    @Test
     @Then("The Login page show an error message.")
     public void the_login_page_show_an_error_message() {
         assertThat(this.homePage).isNull();
@@ -78,6 +88,7 @@ public class LoggingInStep extends AbstractTestNGCucumberTests {
     }
 
     @After
+    @AfterTest
     public void tearDown() {
         this.driver.quit(); // -> Closes the chrome window.
         // this.driver.close(); -> Finishes the WebDriver instance.
