@@ -6,6 +6,7 @@ import org.openqa.selenium.support.FindBy;
 import pages.base.BasePage;
 import utils.enums.TimeForWaiting;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,7 +25,7 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public boolean validateElementsAreVisible(){
+    public boolean validateElementsAreVisible() throws IOException {
 
         List<WebElement> elements = new ArrayList<>();
         elements.add(this.viewMyDetailsButton);
