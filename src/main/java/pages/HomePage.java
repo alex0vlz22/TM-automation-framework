@@ -25,8 +25,13 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-    public boolean validateElementsAreVisible() throws IOException {
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
+    public boolean validateElementsAreVisible() throws IOException {
         List<WebElement> elements = new ArrayList<>();
         elements.add(this.viewMyDetailsButton);
         elements.add(this.userDropdownMenu);

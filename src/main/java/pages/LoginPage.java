@@ -29,14 +29,27 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
+    /**
+     * Waits for {@link #usernameField} visibility and send keys to it.
+     *
+     * @param username {@link #usernameField} used for communicating with web element.
+     * @throws FrameworkException {@link FrameworkException} thrown if the web element is not found.
+     * @throws IOException {@link IOException} thrown if something goes wrong trying to take screenshot.
+     */
     public void fillUsername(CharSequence username) throws FrameworkException, IOException {
         if (super.waitForWebElementVisibility(TimeForWaiting.FIVE_SECONDS, this.usernameField)) {
             super.sendKeys(username, this.usernameField);
-        } else {
             throw new FrameworkException("The username field couldn't be found.");
         }
     }
 
+    /**
+     *
+     *
+     * @param password
+     * @throws FrameworkException
+     * @throws IOException
+     */
     public void fillPassword(CharSequence password) throws FrameworkException, IOException {
         if (super.waitForWebElementVisibility(TimeForWaiting.FIVE_SECONDS, this.passwordField)) {
             super.sendKeys(password, this.passwordField);
@@ -45,6 +58,12 @@ public class LoginPage extends BasePage {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     * @throws FrameworkException
+     */
     public HomePage clickLoginButton() throws IOException, FrameworkException {
         super.waitForWebElementToBeClickable(TimeForWaiting.FIVE_SECONDS, this.loginButton);
         this.loginButton.click();
@@ -55,6 +74,11 @@ public class LoginPage extends BasePage {
         }
     }
 
+    /**
+     *
+     * @return
+     * @throws IOException
+     */
     public boolean validateElementsAreVisible() throws IOException {
         List<WebElement> elements = new ArrayList<>();
         elements.add(this.usernameField);
