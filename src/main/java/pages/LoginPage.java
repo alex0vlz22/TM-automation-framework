@@ -34,7 +34,7 @@ public class LoginPage extends BasePage {
      *
      * @param username {@link #usernameField} used for communicating with web element.
      * @throws FrameworkException {@link FrameworkException} thrown if the web element is not found.
-     * @throws IOException {@link IOException} thrown if something goes wrong trying to take screenshot.
+     * @throws IOException        {@link IOException} thrown if something goes wrong trying to take screenshot.
      */
     public void fillUsername(CharSequence username) throws FrameworkException, IOException {
         if (super.waitForWebElementVisibility(TimeForWaiting.FIVE_SECONDS, this.usernameField)) {
@@ -44,11 +44,11 @@ public class LoginPage extends BasePage {
     }
 
     /**
+     * Waits for {@link #passwordField} visibility and send keys to it.
      *
-     *
-     * @param password
-     * @throws FrameworkException
-     * @throws IOException
+     * @param password {@link #passwordField} used for communicating with web element.
+     * @throws FrameworkException {@link FrameworkException} thrown if the web element is not found.
+     * @throws IOException        {@link IOException} thrown if something goes wrong trying to take screenshot.
      */
     public void fillPassword(CharSequence password) throws FrameworkException, IOException {
         if (super.waitForWebElementVisibility(TimeForWaiting.FIVE_SECONDS, this.passwordField)) {
@@ -59,10 +59,11 @@ public class LoginPage extends BasePage {
     }
 
     /**
+     * Waits for {@link #loginButton} to be clickable and clicks it.
      *
-     * @return
-     * @throws IOException
-     * @throws FrameworkException
+     * @return new instance for {@link HomePage}.
+     * @throws IOException        {@link IOException} thrown if something goes wrong trying to take screenshot.
+     * @throws FrameworkException {@link FrameworkException} thrown if the web element is not found.
      */
     public HomePage clickLoginButton() throws IOException, FrameworkException {
         super.waitForWebElementToBeClickable(TimeForWaiting.FIVE_SECONDS, this.loginButton);
@@ -75,9 +76,10 @@ public class LoginPage extends BasePage {
     }
 
     /**
+     * Waits for visibility of given {@link WebElement} list.
      *
-     * @return
-     * @throws IOException
+     * @return {@code true} if all elements are visible or {@code false} otherwise.
+     * @throws IOException {@link IOException} thrown if something goes wrong trying to take screenshot.
      */
     public boolean validateElementsAreVisible() throws IOException {
         List<WebElement> elements = new ArrayList<>();

@@ -27,9 +27,10 @@ public class HomePage extends BasePage {
 
 
     /**
+     * Waits for visibility of given {@link WebElement} list.
      *
-     * @return
-     * @throws IOException
+     * @return {@code true} if all elements are visible or {@code false} otherwise.
+     * @throws IOException {@link IOException} thrown if something goes wrong trying to take screenshot.
      */
     public boolean validateElementsAreVisible() throws IOException {
         List<WebElement> elements = new ArrayList<>();
