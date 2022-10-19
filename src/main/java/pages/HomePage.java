@@ -3,12 +3,9 @@ package pages;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
-import pages.base.BasePage;
-import utils.enums.TimeForWaiting;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class HomePage extends BasePage {
 
@@ -25,19 +22,16 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
-
     /**
-     * Waits for visibility of given {@link WebElement} list.
+     * Waits for {@link #addButton} to be clickable and clicks on it.
      *
-     * @return {@code true} if all elements are visible or {@code false} otherwise.
+     * @return new instance for {@link CreateUserPage}.
      * @throws IOException {@link IOException} thrown if something goes wrong trying to take screenshot.
      */
-    public boolean validateElementsAreVisible() throws IOException {
-        List<WebElement> elements = new ArrayList<>();
-        elements.add(this.viewMyDetailsButton);
-        elements.add(this.userDropdownMenu);
-        elements.add(this.addButton);
-        return super.waitForMultipleWebElementsToBeVisible(TimeForWaiting.FIVE_SECONDS, elements);
+    public CreateUserPage clickOnAddButton() throws IOException {
+        super.wait.until(ExpectedConditions.elementToBeClickable(this.addButton));
+        this.addButton.click();
+        return new CreateUserPage(super.driver);
     }
 
 
