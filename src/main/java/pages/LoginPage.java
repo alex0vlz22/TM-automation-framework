@@ -1,5 +1,6 @@
 package pages;
 
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -39,6 +40,12 @@ public class LoginPage extends BasePage {
         super.wait.until(ExpectedConditions.elementToBeClickable(this.loginButton));
         this.loginButton.click();
         return new HomePage(this.driver);
+    }
+
+    public String requiredErrorMessage(){
+        WebElement requiredText = super.driver.findElement(By.cssSelector(PASSWORD_REQUIRED_TEXT_CSS_LOCATOR));
+        super.wait.until(ExpectedConditions.visibilityOf(requiredText));
+        return requiredText.getText();
     }
 
 }
