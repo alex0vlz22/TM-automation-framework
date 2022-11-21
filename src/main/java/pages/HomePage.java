@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.ExpectedConditions;
+import utils.enums.HomePageOptions;
 
 import java.io.IOException;
 
@@ -18,7 +19,7 @@ public class HomePage extends BasePage {
     @FindBy(css = "li[class*='oxd-userdropdown']")
     private WebElement userDropdownMenu;
 
-    @FindBy(xpath = "//*[contains(text(), 'Add')]")
+    @FindBy(xpath = "//*[text()=' Add ']")
     private WebElement addButton;
 
     @FindBy(xpath = "(//input[@class='oxd-input oxd-input--active'])[last()]")
@@ -27,43 +28,13 @@ public class HomePage extends BasePage {
     @FindBy(xpath = "//button[text()=' Search ']")
     private WebElement searchButton;
 
-    @FindBy(css = "a[href*='viewAdminModule']")
-    private WebElement adminOption;
-
-    @FindBy(css = "a[href*='viewLeaveModule']")
-    private WebElement leaveOption;
-
-    @FindBy(css = "a[href*='viewTimeModule']")
-    private WebElement timeOption;
-
-    @FindBy(css = "a[href*='viewRecruitmentModule']")
-    private WebElement recruitmentOption;
-
-    @FindBy(css = "a[href*='viewMyDetails']")
-    private WebElement myDetailsOption;
-
-    @FindBy(css = "a[href*='viewPerformanceModule']")
-    private WebElement performanceOption;
-
-    @FindBy(css = "a[href*='dashboard']")
-    private WebElement dashboardOption;
-
-    @FindBy(css = "a[href*='viewDirectory']")
-    private WebElement directoryOption;
-
-    @FindBy(css = "a[href*='viewMaintenanceModule']")
-    private WebElement maintenanceOption;
-
-    @FindBy(css = "a[href*='viewBuzz']")
-    private WebElement buzzOption;
-
     @FindBy(css = "h4[class*='oxd-text oxd-text--h4']")
     private WebElement sectionTitleH4;
 
     @FindBy(css = "h5[class*='oxd-text']")
     private WebElement sectionTitleH5;
 
-    @FindBy(css = "h6[class*='oxd-text oxd-text--h6 orangehrm-main-title']")
+    @FindBy(css = "h6[class*='oxd-text']")
     private WebElement sectionTitleH6;
 
     @FindBy(css = "a[href*='logout']")
@@ -73,7 +44,13 @@ public class HomePage extends BasePage {
         super(driver);
     }
 
+    public void goToAdminOption(){
+        super.wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("a[href*='Admin']")));
+        super.driver.findElement(By.cssSelector("a[href*='Admin']")).click();
+    }
+
     public CreateUserPage clickOnAddButton() {
+        goToAdminOption();
         super.wait.until(ExpectedConditions.elementToBeClickable(this.addButton));
         this.addButton.click();
         return new CreateUserPage(super.driver);
@@ -96,61 +73,11 @@ public class HomePage extends BasePage {
         return super.driver.findElement(By.xpath(RECORDS_FOUND_XPATH_LOCATOR)).getText();
     }
 
-    public void clickOnAdminOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.adminOption));
-        this.adminOption.click();
-    }
-
-    public void clickOnLeaveOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.leaveOption));
-        this.leaveOption.click();
-    }
-
-    public void clickOnTimeOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.timeOption));
-        this.timeOption.click();
-    }
-
-    public void clickOnRecruitmentOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.recruitmentOption));
-        this.recruitmentOption.click();
-    }
-
-    public PersonalDetailsPage clickOnMyDetailsOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.myDetailsOption));
-        this.myDetailsOption.click();
-        return new PersonalDetailsPage(super.driver);
-    }
-
-    public void clickOnPerformanceOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.performanceOption));
-        this.performanceOption.click();
-    }
-
-    public void clickOnDashboardOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.dashboardOption));
-        this.dashboardOption.click();
-    }
-
-    public void clickOnDirectoryOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.directoryOption));
-        this.directoryOption.click();
-    }
-
-    public MaintenancePage clickOnMaintenanceOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.maintenanceOption));
-        this.maintenanceOption.click();
-        return new MaintenancePage(super.driver);
-    }
-
-    public void clickOnBuzzOption() {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.buzzOption));
-        this.buzzOption.click();
-    }
-
-    public String getSectionTitleH4() {
-        super.wait.until(ExpectedConditions.visibilityOf(this.sectionTitleH4));
-        return this.sectionTitleH4.getText();
+    public void clickOnOption(HomePageOptions option) {
+        super.wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href*='" + option.getLocator() + "']")));
+        WebElement optionButton = super.driver.findElement(By.cssSelector("a[href*='" + option.getLocator() + "']"));
+        super.wait.until(ExpectedConditions.elementToBeClickable(optionButton));
+        optionButton.click();
     }
 
     public String getSectionTitleH5() {

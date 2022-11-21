@@ -12,9 +12,8 @@ public class UserCreationActions {
         this.driver = driver;
     }
 
-    public PersonalDetailsPage createUser(String firstName, String lastName, CreateUserPage createUserPage) {
-        createUserPage.fillFirstNameField(firstName);
-        createUserPage.fillLastNameField(lastName);
+    public PersonalDetailsPage createUser(String firstName, CreateUserPage createUserPage) {
+        createUserPage.fillNameField(firstName);
         return createUserPage.clickSaveButton();
     }
 

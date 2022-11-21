@@ -4,8 +4,8 @@ public enum Url {
 
     ORANGE_DEMO("Orange", "https://opensource-demo.orangehrmlive.com/web/index.php/auth/login");
 
-    private String name;
-    private String url;
+    private final String name;
+    private final String url;
 
     Url(String name, String url) {
         this.name = name;

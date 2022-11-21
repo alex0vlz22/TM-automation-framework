@@ -7,11 +7,8 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class CreateUserPage extends BasePage {
 
-    @FindBy(name = "firstName")
-    private WebElement firstNameField;
-
-    @FindBy(name = "lastName")
-    private WebElement lastNameField;
+    @FindBy(css = "input[placeholder='Type for hints...']")
+    private WebElement name;
 
     @FindBy(xpath = "//button[text()=' Save ']")
     private WebElement saveButton;
@@ -26,14 +23,9 @@ public class CreateUserPage extends BasePage {
         super(driver);
     }
 
-    public void fillFirstNameField(CharSequence firstName) {
-        super.wait.until(ExpectedConditions.visibilityOf(this.firstNameField));
-        this.firstNameField.sendKeys(firstName);
-    }
-
-    public void fillLastNameField(CharSequence lastName) {
-        super.wait.until(ExpectedConditions.visibilityOf(this.lastNameField));
-        this.lastNameField.sendKeys(lastName);
+    public void fillNameField(CharSequence name) {
+        super.wait.until(ExpectedConditions.visibilityOf(this.name));
+        this.name.sendKeys(name);
     }
 
     public PersonalDetailsPage clickSaveButton() {

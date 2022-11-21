@@ -26,25 +26,25 @@ public class LoginPage extends BasePage {
         super(driver);
     }
 
-    public void fillUsername(CharSequence username) throws FrameworkException, IOException {
-        super.wait.until(ExpectedConditions.visibilityOf(this.usernameField));
-        super.sendKeys(username, this.usernameField);
+    public void fillUsername(CharSequence username) {
+        this.wait.until(ExpectedConditions.visibilityOf(this.usernameField));
+        this.sendKeys(username, this.usernameField);
     }
 
-    public void fillPassword(CharSequence password) throws FrameworkException, IOException {
-        super.wait.until(ExpectedConditions.visibilityOf(this.passwordField));
-        super.sendKeys(password, this.passwordField);
+    public void fillPassword(CharSequence password) {
+        this.wait.until(ExpectedConditions.visibilityOf(this.passwordField));
+        this.sendKeys(password, this.passwordField);
     }
 
-    public HomePage clickLoginButton() throws IOException, FrameworkException {
-        super.wait.until(ExpectedConditions.elementToBeClickable(this.loginButton));
+    public HomePage clickLoginButton() {
+        this.wait.until(ExpectedConditions.elementToBeClickable(this.loginButton));
         this.loginButton.click();
         return new HomePage(this.driver);
     }
 
-    public String requiredErrorMessage(){
-        WebElement requiredText = super.driver.findElement(By.cssSelector(PASSWORD_REQUIRED_TEXT_CSS_LOCATOR));
-        super.wait.until(ExpectedConditions.visibilityOf(requiredText));
+    public String requiredErrorMessage() {
+        WebElement requiredText = this.driver.findElement(By.cssSelector(PASSWORD_REQUIRED_TEXT_CSS_LOCATOR));
+        this.wait.until(ExpectedConditions.visibilityOf(requiredText));
         return requiredText.getText();
     }
 
